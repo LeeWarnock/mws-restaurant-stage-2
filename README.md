@@ -58,7 +58,7 @@ debug: Port : 1337
 If you find a bug in the source code or a mistake in the documentation, you can help us by
 submitting an issue to our [Waffle Dashboard](https://waffle.io/udacity/mwnd-issues). Even better you can submit a Pull Request with a fix :)
 
-##Serve the site
+## Serve the site
 
 1. In this folder, start up a simple HTTP server to serve up the site files on your local computer. Python has some simple tools to do this, and you don't even need to know Python. For most people, it's already installed on your computer.
 

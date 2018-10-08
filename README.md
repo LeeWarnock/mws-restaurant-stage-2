@@ -1,4 +1,4 @@
-# mws-restaurant-stage-2-client
+# mws-restaurant-stage-2
 
 # Mobile Web Specialist Certification Course
 

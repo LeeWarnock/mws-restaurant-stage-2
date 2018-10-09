@@ -5,10 +5,6 @@ const browserSync = require('browser-sync').create();
 const del = require('del');
 const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
-+const browserify = require('browserify');
-+const babelify = require('babelify');
-+const buffer = require('vinyl-buffer');
-+const source = require('vinyl-source-stream');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;

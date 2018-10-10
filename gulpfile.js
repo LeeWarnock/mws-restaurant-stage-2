@@ -82,7 +82,7 @@ gulp.task("lint:test", () => {
   return lint("test/spec/**/*.js").pipe(gulp.dest("test/spec"));
 });
 
-gulp.task("html", ["css", "js"], () => {
+gulp.task("html", ["css", "js", "sw"], () => {
   return gulp
     .src("app/*.html")
     .pipe($.useref({ searchPath: [".tmp", "app", "."] }))

@@ -9,6 +9,14 @@ self.addEventListener("install", function(event) {
 });
 
 var CACHE_NAME = "restaurant-reviews-cache-v1";
+
+const dbPromise = idb.open("restaurant-reviews-cache-v1", 1, upgradeDB => {
+  switch (updradeDB.oldVersion) {
+    case 0:
+      upgradeDB.createObjectStore("restaurants", { keyPath: "id" });
+  }
+});
+
 var urlsToCache = [
   "/",
   "./index.html",

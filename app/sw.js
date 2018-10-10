@@ -4,6 +4,16 @@ https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
 */
 import idb from "idb";
 
+self.addEventListener("install", function(event) {
+  // Perform install steps
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      console.log("Opened cache");
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+
 var CACHE_NAME = "restaurant-reviews-cache-v1";
 
 const dbPromise = idb.open("restaurant-reviews-cache-v1", 1, upgradeDB => {
@@ -33,16 +43,6 @@ var urlsToCache = [
   "./img/9.jpg",
   "./img/10.jpg"
 ];
-
-self.addEventListener("install", function(event) {
-  // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      console.log("Opened cache");
-      return cache.addAll(urlsToCache);
-    })
-  );
-});
 
 self.addEventListener("activate", function(event) {
   event.waitUntil(self.clients.claim());

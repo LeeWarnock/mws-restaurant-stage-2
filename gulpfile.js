@@ -15,12 +15,12 @@ const reload = browserSync.reload;
 
 let dev = true;
 
-gulp.task('styles', () => {
-  return gulp.src('app/styles/*.css')
+gulp.task('css', () => {
+  return gulp.src('app/css/*.css')
     .pipe($.if(dev, $.sourcemaps.init()))
     .pipe($.autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'Firefox ESR'] }))
     .pipe($.if(dev, $.sourcemaps.write()))
-    .pipe(gulp.dest('.tmp/styles'))
+    .pipe(gulp.dest('.tmp/css'))
     .pipe(reload({ stream: true }));
 });
 
@@ -51,7 +51,7 @@ gulp.task('lint:test', () => {
     .pipe(gulp.dest('test/spec'));
 });
 
-gulp.task('html', ['styles', 'js'], () => {
+gulp.task('html', ['css', 'js'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
     .pipe($.if(/\.js$/, $.uglify({ compress: { drop_console: true } })))
@@ -93,7 +93,7 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
-  runSequence(['clean', 'wiredep'], ['styles', 'js', 'fonts'], () => {
+  runSequence(['clean', 'wiredep'], ['css', 'js', 'fonts'], () => {
     browserSync.init({
       notify: false,
       port: 9000,
@@ -111,7 +111,7 @@ gulp.task('serve', () => {
       '.tmp/fonts/**/*'
     ]).on('change', reload);
 
-    gulp.watch('app/styles/**/*.css', ['styles']);
+    gulp.watch('app/css/**/*.css', ['css']);
     gulp.watch('app/js/**/*.js', ['js']);
     gulp.watch('app/fonts/**/*', ['fonts']);
     gulp.watch('bower.json', ['wiredep', 'fonts']);

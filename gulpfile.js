@@ -151,7 +151,8 @@ gulp.task("serve", () => {
       .on("change", reload);
 
     gulp.watch("app/css/**/*.css", ["css"]);
-    gulp.watch("app/js/**/*.js", ["js"]);
+    gulp.watch("app/js/**/*.js", ["html", "js", "dbhelper"]);
+    gulp.watch("app/sw.js", ["sw"]);
     gulp.watch("app/fonts/**/*", ["fonts"]);
     gulp.watch("bower.json", ["wiredep", "fonts"]);
   });

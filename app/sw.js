@@ -4,10 +4,6 @@ https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
 */
 import idb from "idb";
 
-self.addEventListener("install", function(event) {
-  // Perform install steps
-});
-
 var CACHE_NAME = "restaurant-reviews-cache-v1";
 
 const dbPromise = idb.open("restaurant-reviews-cache-v1", 1, upgradeDB => {

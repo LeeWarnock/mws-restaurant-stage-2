@@ -3,6 +3,15 @@
  */
 import idb from "idb";
 
+let fetchedCuisines;
+let fetchedNeighborhoods;
+const dbPromise = idb.open("restaurant-reviews-cache-v1", 1, upgradeDB => {
+  switch (upgradeDB.oldVersion) {
+    case 0:
+      upgradeDB.createObjectStore("restaurants", { keyPath: "id" });
+  }
+});
+
 class DBHelper {
   /**
    * Database URL.
@@ -10,7 +19,7 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/data/restaurants.json`;
+    return `http://localhost:${port}/app/data/restaurants.json`;
   }
 
   /**

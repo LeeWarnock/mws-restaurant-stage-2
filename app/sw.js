@@ -1,8 +1,10 @@
 /*
 Service worker code taken from: https://developers.google.com/web/fundamentals/primers/service-workers/#install_a_service_worker
-https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim 
+https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
 */
 import idb from "idb";
+
+var CACHE_NAME = "restaurant-reviews-cache-v1";
 
 self.addEventListener("install", function(event) {
   // Perform install steps
@@ -13,8 +15,6 @@ self.addEventListener("install", function(event) {
     })
   );
 });
-
-var CACHE_NAME = "restaurant-reviews-cache-v1";
 
 const dbPromise = idb.open("restaurant-reviews-cache-v1", 1, upgradeDB => {
   switch (updradeDB.oldVersion) {

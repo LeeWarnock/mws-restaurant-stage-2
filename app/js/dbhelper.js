@@ -73,16 +73,17 @@ class DBHelper {
       if (error) {
         callback(error, null);
       } else {
+        //const restaurant = restaurants.find(r => r.id == id);
         const restaurant = restaurants;
         if (restaurant) {
           // Got the restaurant
           callback(null, restaurant);
         } else {
           // Restaurant does not exist in the database
-          callback("Restaurant not found.", null);
+          callback("Restaurant does not exist", null);
         }
       }
-    });
+    }, id);
   }
 
   /**
@@ -214,4 +215,5 @@ class DBHelper {
     return marker;
   }
 }
+
 window.DBHelper = DBHelper;

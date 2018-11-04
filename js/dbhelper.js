@@ -12,9 +12,9 @@ class DBHelper {
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-    const port = 8000; // Change this to your server port
+        const port = 1337; // Change this to your server port
 
-    return `http://localhost:${port}/data/restaurants.json`;
+        return "http://localhost:1337/restaurants";
   }
 
   /**
@@ -196,3 +196,4 @@ class DBHelper {
     return marker;
   }
 }
+const dbPromise = DBHelper.openDatabase();

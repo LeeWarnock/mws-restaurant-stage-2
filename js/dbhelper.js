@@ -7,6 +7,19 @@
  */
 
 class DBHelper {
+    static openDatabase() {
+        if (!navigator.serviceWorker) {
+            return Promise.resolve();
+        }
+        return idb.open('rrx', 1, function(upgradeDb) {
+            var storex = upgradeDb.createObjectStore('restaurants');
+            var storey = upgradeDb.createObjectStore('reviews');
+        });
+    }
+    static storeAllRestaurants(restaurantdata) {
+        for (x = 0; x < restaurantdata.length; x++) {
+        }
+    }
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -21,25 +34,50 @@ class DBHelper {
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-    const xhr = new XMLHttpRequest();
+        // let xhr = new XMLHttpRequest();
 
-    xhr.open("GET", DBHelper.DATABASE_URL);
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        // Got a success response from server!
-        const json = JSON.parse(xhr.responseText),
-          restaurants = json.restaurants;
+        // xhr.open('GET', DBHelper.DATABASE_URL);
+        // xhr.onload = () => {
+        //   if (xhr.status === 200) { // Got a success response from server!
+        //     const json = JSON.parse(xhr.responseText);
+        //     const restaurants = json.restaurants;
+        //     callback(null, restaurants);
+        //   } else { // Oops!. Got an error from server.
+        //     const error = (`Request failed. Returned status of ${xhr.status}`);
+        //     callback(error, null);
+        //   }
+        // };
+        // xhr.send();
+        fetch(DBHelper.DATABASE_URL).then(function(response) {
+            let resp = response;
+            return resp.json();
+        }).then(function(restaurants) {
+            
+            
+                DBHelper.openDatabase().then(function(response) {
+                    console.log(restaurants)
+                    var tx = response.transaction('restaurants', 'readwrite');
+                    var storex = tx.objectStore('restaurants');
+                    for (let restaurant of restaurants) {
+                        storex.put(restaurant, restaurant.id);
+                
+                        // return tx.complete;
+                    }
+                callback(null, restaurants);
+                });
+                
+        }).catch(function (err) {
+                    DBHelper.openDatabase().then(function(response) {
+                      var tx = response.transaction('restaurants', 'readwrite');
+                      var storex = tx.objectStore('restaurants');
+                      return storex.getAll();
+                    }).then(val => {
+                      console.log("offline" + val)
+                      callback(null, val)
+                    })
+                  });
+    }
 
-        callback(null, restaurants);
-      } else {
-        // Oops!. Got an error from server.
-        const error = `Request failed. Returned status of ${xhr.status}`;
-
-        callback(error, null);
-      }
-    };
-    xhr.send();
-  }
 
   /**
    * Fetch a restaurant by its ID.

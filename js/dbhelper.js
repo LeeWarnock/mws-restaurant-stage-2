@@ -40,7 +40,7 @@ class DBHelper {
       })
       .then(function(restaurants) {
         DBHelper.openDatabase().then(function(response) {
-          console.log(restaurants);
+          //console.log(restaurants);
           var tx = response.transaction("restaurants", "readwrite");
           var storex = tx.objectStore("restaurants");
           for (let restaurant of restaurants) {

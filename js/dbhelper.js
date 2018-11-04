@@ -2,6 +2,8 @@
 /* eslint-disable line-comment-position */
 /* eslint-disable lines-around-comment */
 /* eslint-disable valid-jsdoc */
+//Constants
+const port = 1337;
 /**
  * Common database helper functions.
  */
@@ -26,9 +28,9 @@ class DBHelper {
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-    const port = 1337; // Change this to your server port
-    return "http://localhost:1337/restaurants";
+    return `http://localhost:${port}/restaurants`;
   }
+
   /**
    * Fetch all restaurants.
    */

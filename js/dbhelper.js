@@ -5,6 +5,7 @@
 /**
  * Common database helper functions.
  */
+
 class DBHelper {
   /**
    * Database URL.

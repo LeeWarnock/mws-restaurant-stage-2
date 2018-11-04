@@ -1,4 +1,3 @@
-//import idb from "idb";
 /* eslint-disable no-inline-comments */
 /* eslint-disable line-comment-position */
 /* eslint-disable lines-around-comment */
@@ -220,4 +219,3 @@ class DBHelper {
   }
 }
 const dbPromise = DBHelper.openDatabase();
-initRestaurants();

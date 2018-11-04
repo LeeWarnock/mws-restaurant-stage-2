@@ -16,7 +16,6 @@ self.addEventListener("install", function(e) {
         "/js/restaurant_info.js",
         "/js/idb.js",
         "/img/"
-        //   '/img/*.jpg'
       ]);
     })
   );

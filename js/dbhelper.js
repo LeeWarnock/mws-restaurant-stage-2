@@ -1,3 +1,4 @@
+import idb from "idb";
 /* eslint-disable no-inline-comments */
 /* eslint-disable line-comment-position */
 /* eslint-disable lines-around-comment */
@@ -7,77 +8,61 @@
  */
 
 class DBHelper {
-    static openDatabase() {
-        if (!navigator.serviceWorker) {
-            return Promise.resolve();
-        }
-        return idb.open('rrx', 1, function(upgradeDb) {
-            var storex = upgradeDb.createObjectStore('restaurants');
-            var storey = upgradeDb.createObjectStore('reviews');
-        });
+  static openDatabase() {
+    if (!navigator.serviceWorker) {
+      return Promise.resolve();
     }
-    static storeAllRestaurants(restaurantdata) {
-        for (x = 0; x < restaurantdata.length; x++) {
-        }
-    }
+
+    return idb.open("rrx", 1, function(upgradeDb) {
+      var storex = upgradeDb.createObjectStore("restaurants");
+      var storey = upgradeDb.createObjectStore("reviews");
+    });
+  }
+
+  static storeAllRestaurants(restaurantdata) {
+    for (x = 0; x < restaurantdata.length; x++) {}
+  }
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-        const port = 1337; // Change this to your server port
-
-        return "http://localhost:1337/restaurants";
+    const port = 1337; // Change this to your server port
+    return "http://localhost:1337/restaurants";
   }
-
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-        // let xhr = new XMLHttpRequest();
-
-        // xhr.open('GET', DBHelper.DATABASE_URL);
-        // xhr.onload = () => {
-        //   if (xhr.status === 200) { // Got a success response from server!
-        //     const json = JSON.parse(xhr.responseText);
-        //     const restaurants = json.restaurants;
-        //     callback(null, restaurants);
-        //   } else { // Oops!. Got an error from server.
-        //     const error = (`Request failed. Returned status of ${xhr.status}`);
-        //     callback(error, null);
-        //   }
-        // };
-        // xhr.send();
-        fetch(DBHelper.DATABASE_URL).then(function(response) {
-            let resp = response;
-            return resp.json();
-        }).then(function(restaurants) {
-            
-            
-                DBHelper.openDatabase().then(function(response) {
-                    console.log(restaurants)
-                    var tx = response.transaction('restaurants', 'readwrite');
-                    var storex = tx.objectStore('restaurants');
-                    for (let restaurant of restaurants) {
-                        storex.put(restaurant, restaurant.id);
-                
-                        // return tx.complete;
-                    }
-                callback(null, restaurants);
-                });
-                
-        }).catch(function (err) {
-                    DBHelper.openDatabase().then(function(response) {
-                      var tx = response.transaction('restaurants', 'readwrite');
-                      var storex = tx.objectStore('restaurants');
-                      return storex.getAll();
-                    }).then(val => {
-                      console.log("offline" + val)
-                      callback(null, val)
-                    })
-                  });
-    }
-
+    fetch(DBHelper.DATABASE_URL)
+      .then(function(response) {
+        let resp = response;
+        return resp.json();
+      })
+      .then(function(restaurants) {
+        DBHelper.openDatabase().then(function(response) {
+          console.log(restaurants);
+          var tx = response.transaction("restaurants", "readwrite");
+          var storex = tx.objectStore("restaurants");
+          for (let restaurant of restaurants) {
+            storex.put(restaurant, restaurant.id);
+          }
+          callback(null, restaurants);
+        });
+      })
+      .catch(function(err) {
+        DBHelper.openDatabase()
+          .then(function(response) {
+            var tx = response.transaction("restaurants", "readwrite");
+            var storex = tx.objectStore("restaurants");
+            return storex.getAll();
+          })
+          .then(val => {
+            console.log("offline" + val);
+            callback(null, val);
+          });
+      });
+  }
 
   /**
    * Fetch a restaurant by its ID.
@@ -235,3 +220,4 @@ class DBHelper {
   }
 }
 const dbPromise = DBHelper.openDatabase();
+initRestaurants();

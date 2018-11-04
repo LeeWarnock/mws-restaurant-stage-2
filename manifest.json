@@ -1,19 +1,19 @@
 {
-  "short_name": "FoodReviews",
+  "short_name": "DinnerTime",
   "name": "Restaurant Reviews",
-  "description": "Restaurant Reviews App - Part of the Udacity Mobile Web Soecialist Nano-Degree",
+  "description": "A Restaurant Reviews and Locations App",
   "start_url": "index.html",
   "theme_color": "blue",
   "background_color": "orange",
   "display": "fullscreen",
   "icons": [
     {
-      "src": "img/icons/rr-icon-192.png",
+      "src": "img/icons/FoodFinder-Icon-192",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "img/icons/rr-icon-512.png",
+      "src": "img/icons/FoodFinder-Icon-512",
       "type": "image/png",
       "sizes": "512x512"
     }

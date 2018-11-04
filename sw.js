@@ -5,6 +5,7 @@ self.addEventListener("install", function(e) {
         "/",
         "/index.html",
         "/restaurant.html",
+        "/manifest.json",
         "/data/",
         "/data/restaurants.json",
         "/css/",

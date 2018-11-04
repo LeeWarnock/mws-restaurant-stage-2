@@ -1,3 +1,4 @@
+import idb from "idb";
 /* eslint-disable no-inline-comments */
 /* eslint-disable line-comment-position */
 /* eslint-disable lines-around-comment */

@@ -1,3 +1,4 @@
+import idb from "idb";
 self.addEventListener("install", function(e) {
   e.waitUntil(
     caches.open("up1").then(function(cache) {

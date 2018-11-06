@@ -1,5 +1,3 @@
-self.importScripts("js/idb.js");
-
 self.addEventListener("install", function(e) {
   e.waitUntil(
     caches.open("up1").then(function(cache) {

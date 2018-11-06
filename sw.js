@@ -1,3 +1,5 @@
+self.importScripts("js/idb.js");
+
 self.addEventListener("install", function(e) {
   e.waitUntil(
     caches.open("up1").then(function(cache) {
@@ -6,8 +8,6 @@ self.addEventListener("install", function(e) {
         "/index.html",
         "/restaurant.html",
         "/manifest.json",
-        "/data/",
-        "/data/restaurants.json",
         "/css/",
         "/css/styles.css",
         "/js/",

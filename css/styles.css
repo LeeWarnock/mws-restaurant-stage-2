@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 @font-face {
-  font-family: 'Arvo';
+  font-family: 'Arvo-auto,Arial,Helvetica Neue,Helvetica,sans-serif;';
   font-display: auto;
   src: local('Arvo'), url(https://fonts.gstatic.com/s/arvo/v9/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
 }
@@ -38,6 +38,16 @@ a:focus {
 a img {
   border: none 0px #fff;
 }
+/*David Walsh Lazy Load
+img {
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+img[data-src] {
+	opacity: 0;
+}
+*/
 h1,
 h2,
 h3,
